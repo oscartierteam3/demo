@@ -1,84 +1,126 @@
-const contendI18nMap = {
-  network: {
-    zh: "Kiểm tra bảo mật đã hoàn tất, mạng tốt",
-    vi: "Kiểm tra bảo mật đã hoàn tất, mạng tốt",
-    en: "Security check completed, Network in good condition",
-  },
-  security: {
-    zh: "Trang web an ninh",
-    vi: "An ninh trang web",
-    en: "Site security",
-  },
-  enter: {
-    zh: "bấm vào để nhập",
-    vi: "Nhấp để vào",
-    en: "Click to enter",
-  },
-  loading: {
-    zh: "Đang tiến hành kiểm tra an toàn",
-    vi: "Đang kiểm tra an toàn",
-    en: "Security check in progress",
-  },
-  footer: {
-    zh: "Phần mềm bảo mật cung cấp hỗ trợ kỹ thuật",
-    vi: "Security software provides technical support",
-    en: "Security software provides technical support",
-  },
-};
-
-let language = "zh";
-let url;
-
-const setContendI18n = () => {
-  try {
-    const lang = navigator.language.split("-")[0];
-    if (contendI18nMap["network"][lang]) {
-      language = lang;
-    }
-
-    document.getElementById("redirect-btn").innerHTML =
-      contendI18nMap["enter"][language];
-
-    document.getElementById("contend").innerHTML =
-      contendI18nMap["network"][language];
-    document.getElementById("footer-text").innerHTML =
-      contendI18nMap["footer"][language];
-
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      url = 'https://link-bcb.pages.dev/';
-    } else {
-      url = 'https://link-bcb.pages.dev/';
-    }
-  } catch (error) {
-    console.error(error);
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
   }
-};
 
-const setFooterYear = () => {
-  const year = new Date().getFullYear();
-  document.getElementById("footer-year").innerHTML = year;
-};
-
-const handleClick = () => {
-  // Check if it's a mobile device
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  // If it's not a mobile device, perform the redirect
-  if (1) {
-    // show loading
-    document.querySelector(".status .text").innerHTML =
-      contendI18nMap["loading"][language];
-    document.querySelector(".status .loader").style.display = "flex";
-
-    setTimeout(() => {
-      window.location.href = url;
-    }, 1000);
+  html,
+  body {
+    width: 100%;
+    height: 100%;
   }
-};
 
-window.addEventListener("load", () => {
-  setContendI18n();
-  setFooterYear();
-});
+  .main {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrapper {
+    width: 420px;
+    height: 100%;
+    max-height: 810px;
+    min-height: 600px;
+  }
+
+  @media screen and (max-height: 1000px) {
+    .wrapper {
+      height: 90%;
+    }
+  }
+
+  .content-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .status {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .status .loader {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+  }
+
+  .status .loader .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+    animation: dot-blink 1.5s infinite ease-in-out;
+  }
+
+  @keyframes dot-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .image {
+    display: block;
+    width: 300px;
+  }
+
+  .bottom-section {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }
+
+  .redirect-btn {
+    width: 100%;
+    max-width: 336px;
+    height: 64px;
+    background: #4c9eea;
+    padding: 20px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+
+  .footer {
+    margin-top: 20px;
+  }
+
+  .footer-text {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+    color: #ccc;
+  }
+
+@media only screen and (max-width: 768px) {
+  /* .main {
+    display: none;
+  } */
+}
